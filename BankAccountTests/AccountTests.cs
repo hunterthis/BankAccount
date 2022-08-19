@@ -28,6 +28,7 @@ namespace BankAccount.Tests
             // AAA Arrange, Act, Assert
 
             //Arrange
+            Account acc = new Account("TreeMan");
             double invalidDepositAmount = -1;
             //Act
 
@@ -40,6 +41,7 @@ namespace BankAccount.Tests
         public void Positive_Amount_Balance_returnsBalance()
         {
             // Arrange
+            Account acc = new Account("TreeMan");
             // Act
             acc.Deposit(100);
             //Assert
@@ -48,12 +50,14 @@ namespace BankAccount.Tests
         [TestMethod]
         public void Deposit_Positive_amount(double depositAmount)
         {
+            Account acc = new("TreeMan");
             acc.Deposit(depositAmount);
             Assert.AreEqual(depositAmount, acc.Balance);
         }
         public void Deposit_Zero_orLess_ThrowsArgumentException() 
         {
             //Arrange
+            Account acc = new Account("TreeMan");
             //Act and //Assert
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => acc.Deposit(0));
         
