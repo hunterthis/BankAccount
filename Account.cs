@@ -38,7 +38,7 @@ namespace BankAccount
         {
             if (amt <= 0)
             {
-                throw new ArgumentOutOfRangeException($"The {nameof(amt)} must be declared");
+                throw new ArgumentOutOfRangeException($"The {nameof(amt)} must be positive");
             }
 
             Balance += amt;

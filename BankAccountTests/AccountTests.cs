@@ -12,32 +12,30 @@ namespace BankAccount.Tests
     public class AccountTests
     {
         private Account acc;
-       // [TestInitialize]
+        [TestInitialize]
         public void DefaultAccountCreation()
         {
             acc = new Account("TreeMan");
         }
         [TestMethod]
-        [DataRow()]
-        [DataRow(100)]
-        [DataRow(.01)]
-        [DataRow(1.99)]
-        [DataRow(9999.99)]
-        public void Deposit_Negative_Balance_returnsBalance()
+        
+        [DataRow(0)]
+        [DataRow(-1)]
+        
+        public void Deposit_Negative_Balance_returnsBalance(double depositAmount)
         {
             // AAA Arrange, Act, Assert
 
             //Arrange
-            Account acc = new Account("TreeMan");
-            double invalidDepositAmount = -1;
             //Act
-
             //Assert
-            Assert.ThrowsException<ArgumentOutOfRangeException>
-                (() => acc.Deposit(invalidDepositAmount));
-
+                Assert.ThrowsException<ArgumentOutOfRangeException>
+                    (() => acc.Deposit(depositAmount));
+            
         }
         [TestMethod]
+
+
         public void Positive_Amount_Balance_returnsBalance()
         {
             // Arrange
