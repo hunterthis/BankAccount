@@ -34,7 +34,7 @@ namespace BankAccount
         /// </summary>
         /// <param name="amt">amount deposit</param>
         /// <exception cref="NotImplementedException"></exception>
-        public double Depost(double amt)
+        public double Deposit(double amt)
         {
             Balance += amt;
             return Balance;
