@@ -49,9 +49,10 @@ namespace BankAccount
 /// </summary>
 /// <param name="amt"></param>
 /// <exception cref="NotImplementedException">amount to be withdrawn</exception>
-        public void Withdraw(double amt)
+        public double Withdraw(double amt)
         {
-            throw new NotImplementedException();
+            Balance -= amt;
+            return Balance;
         }
     }
 }

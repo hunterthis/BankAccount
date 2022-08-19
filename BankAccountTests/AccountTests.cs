@@ -27,7 +27,7 @@ namespace BankAccount.Tests
         }
         [TestMethod]
         [DataRow(100)]
-        public void Positive_Amount_Balance_returnsBalance(double depositAmount)
+        public void Deposit_Positive_Amount_Balance_returnsBalance(double depositAmount)
         {
             acc.Deposit(depositAmount);
             Assert.AreEqual(depositAmount, acc.Balance);
@@ -50,10 +50,35 @@ namespace BankAccount.Tests
 
         // withdrawal tests
         [TestMethod]
-        public void MyTestMethod()
+        // Withdraws positive amount and checks to be sure the correct amount was withdrawn
+        public void Withdraw_PosAmount_DecBalance()
         {
-
+            //arrange
+            double initDeposit = 100;
+            double withdrawAmount = 50;
+            double expectedBal = initDeposit - withdrawAmount;
+            //act
+            acc.Deposit(initDeposit);
+            acc.Withdraw(withdrawAmount);
+            double actualBalance = acc.Balance;
+            //assert
+            Assert.AreEqual(expectedBal, actualBalance);
         }
-
+        //withdrays positive amount and returns decreased balance
+        public void Withdraw_PosAmount_ReturnsUpBal() 
+        {
+            Assert.Fail();
+        }
+        //if account is overdrafted, throw argument exception
+        public void Withdraw_Overdraft_ThrowsArgumentExcepetion() 
+        {
+            Assert.Fail();
+        }
+        // if withdrawal amount is negative throw out of range exception
+        public void Withdraw_Negative_ThrowsOutofRangeException() 
+        {
+            Assert.Fail();
+        }
     }
+
 }
