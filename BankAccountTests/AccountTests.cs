@@ -51,9 +51,44 @@ namespace BankAccount.Tests
         // withdrawal tests
         [TestMethod]
         // Withdraws positive amount and checks to be sure the correct amount was withdrawn
-        public void Withdraw_PosAmount_DecBalance()
+        [DataRow(100)]
+        public void Withdraw_PosAmount_DecBalance(double withdrawAmount)
         {
             //arrange
+            double initDeposit = 100;
+            double expectedBal = initDeposit - withdrawAmount;
+            //act
+            acc.Deposit(initDeposit);
+            acc.Withdraw(withdrawAmount);
+            double actualBalance = acc.Balance;
+            //assert
+            Assert.AreEqual(expectedBal, actualBalance);
+        }
+        [TestMethod]
+        //if account is overdrafted, throw argument exception
+        [DataRow(-100)]
+        public void Withdraw_Overdraft_ThrowsArgumentExcepetion(double withdrawAmount) 
+        {
+           
+            Assert.ThrowsException<ArgumentOutOfRangeException>
+                    (() => acc.Deposit(withdrawAmount));
+
+        }
+        [TestMethod]
+        // if withdrawal amount is negative throw out of range exception
+        public void Withdraw_Negative_ThrowsOutofRangeException() 
+        {
+            // arrange
+            double withdrawAmount = -50;
+            acc.Withdraw(withdrawAmount);
+            // act and assert
+            Assert.ThrowsException<ArgumentOutOfRangeException>
+                    (() => acc.Deposit(withdrawAmount));
+        }
+        [TestMethod]
+        //withdrays positive amount and returns decreased balance
+        public void Withdraw_PosAmount_ReturnsUpBal()
+        {
             double initDeposit = 100;
             double withdrawAmount = 50;
             double expectedBal = initDeposit - withdrawAmount;
@@ -63,21 +98,6 @@ namespace BankAccount.Tests
             double actualBalance = acc.Balance;
             //assert
             Assert.AreEqual(expectedBal, actualBalance);
-        }
-        //withdrays positive amount and returns decreased balance
-        public void Withdraw_PosAmount_ReturnsUpBal() 
-        {
-            Assert.Fail();
-        }
-        //if account is overdrafted, throw argument exception
-        public void Withdraw_Overdraft_ThrowsArgumentExcepetion() 
-        {
-            Assert.Fail();
-        }
-        // if withdrawal amount is negative throw out of range exception
-        public void Withdraw_Negative_ThrowsOutofRangeException() 
-        {
-            Assert.Fail();
         }
     }
 
