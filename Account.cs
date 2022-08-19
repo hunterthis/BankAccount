@@ -36,6 +36,11 @@ namespace BankAccount
         /// <exception cref="NotImplementedException"></exception>
         public double Deposit(double amt)
         {
+            if (amt <= 0)
+            {
+                throw new ArgumentOutOfRangeException($"The {nameof(amt)} must be declared");
+            }
+
             Balance += amt;
             return Balance;
         }
