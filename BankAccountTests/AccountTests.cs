@@ -12,15 +12,15 @@ namespace BankAccount.Tests
     public class AccountTests
     {
         private Account acc;
-        [TestInitialize]
-        private void DefaultAccountCreation()
+       // [TestInitialize]
+        public void DefaultAccountCreation()
         {
             acc = new Account("TreeMan");
         }
         [TestMethod]
+        [DataRow()]
         [DataRow(100)]
         [DataRow(.01)]
-        [DataRow()]
         [DataRow(1.99)]
         [DataRow(9999.99)]
         public void Deposit_Negative_Balance_returnsBalance()
@@ -48,8 +48,9 @@ namespace BankAccount.Tests
             Assert.AreEqual(100, acc.Balance);
         }
         [TestMethod]
-        public void Deposit_Positive_amount(double depositAmount)
+        public void Deposit_Positive_amount()
         {
+            double depositAmount = 100;
             Account acc = new("TreeMan");
             acc.Deposit(depositAmount);
             Assert.AreEqual(depositAmount, acc.Balance);
