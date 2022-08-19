@@ -11,54 +11,40 @@ namespace BankAccount.Tests
     [TestClass()]
     public class AccountTests
     {
-        private Account acc;
+        public Account acc;
         [TestInitialize]
         public void DefaultAccountCreation()
         {
             acc = new Account("TreeMan");
         }
         [TestMethod]
-        
-        [DataRow(0)]
         [DataRow(-1)]
-        
         public void Deposit_Negative_Balance_returnsBalance(double depositAmount)
         {
-            // AAA Arrange, Act, Assert
-
-            //Arrange
-            //Act
-            //Assert
                 Assert.ThrowsException<ArgumentOutOfRangeException>
                     (() => acc.Deposit(depositAmount));
             
         }
         [TestMethod]
-
-
-        public void Positive_Amount_Balance_returnsBalance()
+        [DataRow(100)]
+        public void Positive_Amount_Balance_returnsBalance(double depositAmount)
         {
-            // Arrange
-            Account acc = new Account("TreeMan");
-            // Act
-            acc.Deposit(100);
-            //Assert
-            Assert.AreEqual(100, acc.Balance);
-        }
-        [TestMethod]
-        public void Deposit_Positive_amount()
-        {
-            double depositAmount = 100;
-            Account acc = new("TreeMan");
             acc.Deposit(depositAmount);
             Assert.AreEqual(depositAmount, acc.Balance);
         }
-        public void Deposit_Zero_orLess_ThrowsArgumentException() 
+        [TestMethod]
+        [DataRow(100)]
+        public void Deposit_Positive_amount(double depositAmount)
         {
-            //Arrange
-            Account acc = new Account("TreeMan");
-            //Act and //Assert
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => acc.Deposit(0));
+            acc.Deposit(depositAmount);
+            Assert.AreEqual(depositAmount, acc.Balance);
+        }
+        [TestMethod]
+        [DataRow(0)]
+        public void Deposit_Zero_ThrowsArgumentException(double depositAmount) 
+        {
+            Assert.ThrowsException<ArgumentOutOfRangeException>
+                (() => acc.Deposit(0));
         
         }
     }
